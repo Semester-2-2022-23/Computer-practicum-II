@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>If For While</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+	var x=4;
+
+	if ( x%2==0 ){
+		document.write("The number is Even");
+	}else if (x%2==1){
+		document.write("The number is Odd");
+	}
+
+	//document.write("<br>")
+	//document.write("str12"=="str1");
+
+	/*for (var i=0; i<=100; i++){
+		document.write(i+"<br>");
+	}
+
+	var i=0;
+	while(i<100){
+		document.write(i+"<br>");
+		i=i+1;
+	}*/
+
+	document.write("<table>");
+
+	for (var i=1; i<=100; i++){
+		if (i%2==0){
+			document.write("<tr><td>1</td><td>2</td></tr>");
+			for (var j=0; j<=5; j++){
+			document.write("<td>"+j+"</td>")
+			}
+
+		}
+
+	}
+	document.write("</table>");
+
+	/*document.write("<ul>1</ul>");
+	document.write("<ul>2</ul>");
+	document.write("</ul>");*/
+</script>
+</body>
+</html>
