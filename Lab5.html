@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Contact Us</title>
+</head>
+<body>
+	<hr>
+	<h2>Contact Us</h2>
+	<hr>
+
+	<form action="send.php" method="post">
+
+		<form>
+		<fieldset>
+		<legend>Personal Info</legend>
+		<label for="fname">First Name:</label><br>
+		<input id="firstname" type="text" name="fname"><br>
+		<label for="lname">Last Name:</label><br>
+		<input id="lastname" type="text" name="lname"><br>
+		<label for="email">E-mail:</label><br>
+		<input id="email" type="text" name="email"><br>
+
+		<label for="gender">Gender:</label><br>
+		<input id="male" type="radio" name="gender_m" value="itsmale">
+		<label for="gender_m">Male</label><br>
+		<input id="female" type="radio" name="gender_f" value="itsfemale">
+		<label for="gender_f">Female</label><br>
+		<input id="other" type="radio" name="gender_o" value="itsother">
+		<label for="gender_o">Other</label><br>
+		</fieldset>
+
+		<fieldset>
+		<legend>Movies</legend>
+		<div style="float: left;">
+		<input type="checkbox" name="panda" id="pandaID" value="itspanda">
+		<label for="panda">I like panda</label><br>
+		<input type="checkbox" name="minion" id="minionID" value="itsminion">
+		<label for="panda">I like minion</label><br>
+		<input type="checkbox" name="monster" id="monsterID" value="itsmonster">
+		<label for="monster">I like monster</label><br>
+		<input type="checkbox" name="trolls" id="trollsID" value="itstrolls">
+		<label for="trolls">I like trolls</label><br>
+		</div>
+		<div>
+		<input type="checkbox" name="coco" id="cocoID" value="itscoco">
+		<label for="coco">I like coco</label><br>
+		<input type="checkbox" name="croods" id="croodsID" value="itscroods">
+		<label for="croods">I like croods</label><br>
+		<input type="checkbox" name="snail" id="pandaID" value="itssnail">
+		<label for="snail">I like snail</label><br>
+		<input type="checkbox" name="minion" id="minionID" value="itsminion">
+		<label for="panda">I like minion</label><br>
+		</div>
+		</fieldset>
+
+		<fieldset>
+		<legend>Favorite Movie</legend>
+		<select id="favmovie">
+		<option value="itspandaval">Panda</option>
+		<option value="itsminionval">Minion</option>
+		<option value="itscroodsval">Croods</option>
+		</select>
+		</fieldset>
+
+		<fieldset>
+		<legend>Message</legend>
+		<label for="subject">Subject</label><br>
+		<textarea cols="30" rows="1" name="subject"></textarea>
+		<br>
+		<label for="message">Message</label><br>
+		<textarea cols="30" rows="10" name="message"></textarea><br>
+		<input type="date" name="date_name">
+		</fieldset>
+
+	</form>
+	<iframe src="https://www.google.com/maps/place/6000+Koper/@45.5405782,13.6901356,13z/data=!3m1!4b1!4m6!3m5!1s0x477b5d2b02db9545:0x400f81c823ff350!8m2!3d45.548059!4d13.7301877!16zL20vMDJqOGZ0" width="250" height="250"></iframe>
+	<br>
+	<input type="submit" name="Submit" value="Submit">
+	</form>
+</body>
+</html>
