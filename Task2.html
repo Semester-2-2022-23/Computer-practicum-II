@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style> 
+  .border {
+  width: 300px;
+  height: 100px;  
+  padding: 50px;
+  border: 1px green;
+}
+div {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  animation-name: example;
+  animation-duration: 5s;  
+  animation-fill-mode: forwards;
+}
+
+@keyframes example {
+  from {top: 0px;}
+  to {top: 200px;}
+}
+
+#div1 {background-color: green; left: 0px; top: 0px}
+#div2 {background-color: red; left: 100px; top: 0px}
+#div3 {background-color: blue; left: 200px; top: 0px}
+
+</style>
+</head>
+<body>
+
+<div id="div1"></div>
+<div id="div2"></div>
+<div id="div3"></div>
+<div class="border"></div>
+</body>
+</html>
+
+//This code is not fully correct. I will update it when I will have time.
