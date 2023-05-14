@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Drag and Drop Sprint Board</title>
+    <style>
+      .list {
+        display: inline-block;
+        vertical-align: top;
+        padding: 50px;
+        background-color: #eee;
+        margin-right: 10px;
+      }
+
+      .list-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .task {
+        margin-bottom: 5px;
+        padding: 10px;
+        background-color: #ddd;
+        border-radius: 5px;
+        cursor: move;
+      }
+
+      .task.green {
+        background-color: green;
+      }
+
+      .task.orange {
+        background-color: orange;
+      }
+
+      .task.yellow {
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="list" id="todo">
+      <div class="list-title">To Do</div>
+      <div class="task gray" draggable="true">Task 1</div>
+      <div class="task gray" draggable="true">Task 2</div>
+      <div class="task gray" draggable="true">Task 3</div>
+    </div>
+    <div class="list" id="in-progress">
+      <div class="list-title">In Progress</div>
+      <div class="task orange" draggable="true">Task 4</div>
+      <div class="task orange" draggable="true">Task 5</div>
+      <div class="task orange" draggable="true">Task 6</div>
+    </div>
+    <div class="list" id="done">
+      <div class="list-title">Done</div>
+      <div class="task green" draggable="true">Task 7</div>
+      <div class="task green" draggable="true">Task 8</div>
+      <div class="task green" draggable="true">Task 9</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.13.0/Sortable.min.js"></script>
+    <script>
+      var todo = document.getElementById("todo");
+      var inProgress = document.getElementById("in-progress");
+      var done = document.getElementById("done");
+
+      new Sortable(todo, {
+        group: "tasks",
+        draggable: ".task",
+        onEnd: function (evt) {
+          var item = evt.item;
+          var parent = item.parentNode;
+
+          if (parent === inProgress) {
+            item.classList.remove("gray");
+            item.classList.add("green");
+          } else if (parent === done) {
+            item.classList.remove("green");
+            item.classList.add("orange");
+          }
+        },
+      });
+
+      new Sortable(inProgress, {
+        group: "tasks",
+        draggable: ".task",
+        onEnd: function (evt) {
+          var item = evt.item;
+          var parent = item.parentNode;
+
+          if (parent === todo) {
+            item.classList.remove("orange");
+            item.classList.add("gray");
+          } else if (parent === done) {
+            item.classList.remove("orange");
+            item.classList.add("green");
+          }
+        },
+      });
+
+      new Sortable(done, {
+        group: "tasks",
+        draggable: ".task",
+        onEnd: function (evt) {
+          var item = evt.item;
+          var parent = item.parentNode;
+
+          if (parent === todo) {
+            item.classList.remove("green");
+            item.classList.add("orange");
+    } else if (parent === inProgress) {
+      item.classList.remove("orange");
+      item.classList.add("orange");
+    }
+  },
+});
+    </script>
+  </body>
+</html>
