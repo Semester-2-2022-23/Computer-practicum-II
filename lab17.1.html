@@ -1,0 +1,185 @@
+//The code is working but there are no bombs and there is not window pop up for the end of the game so you cannot know if you win or you lose
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Bomber Thief</title>
+
+	<style type="text/css">
+		body {
+			background-color: black;
+		}
+		table {
+			border: 2px solid black;
+			border-collapse: collapse;
+			margin: auto;
+		}
+		td, tr {
+			border: 1px solid black;
+			background-color: gray;
+			width: 5vw;
+			height: 5vw;
+			border-collapse: collapse;
+			font-size: 2vw;
+			text-align: center;
+			color: gold;
+		}
+		.target {
+			border-radius: 50%;
+			width: 4.6vw;
+			height: 4.6vw;
+			background-color: red;
+		}
+		#player {
+			border-radius: 50%;
+			border: 2px solid black;
+			width: 4vw;
+			height: 4vw;
+			background-color: green;
+		}
+		.baseimg {
+			width: 4.6vw;
+			height: 4.6vw;
+		}
+		.notification {
+			border: 3px solid black;
+			position: absolute;
+			left: 0; 
+			right: 0; 
+			margin: auto;
+			margin-top: 10vw;
+			z-index: 100;
+			width: 30vw;
+			height: 15vw;
+			font-size: 5vw;
+			text-align: center;
+			background-color: green;
+			color: white;
+			display: none;
+		}
+	</style>
+	<script type="text/javascript">
+		let nRow = 7;
+		let nCol = 10;
+		let nCoins = 9;
+		let coinsCollected = 0;
+		let playerRow = 0;
+		let playerCol = 0;
+		let board = [];
+		function getRandomCell() {
+			const randomRow = Math.floor(Math.random() * nRow);
+			const randomCol = Math.floor(Math.random() * nCol);
+			return { row: randomRow, col: randomCol };
+		}
+		function generateBoard() {
+			for (let i = 0; i < nRow; i++) {
+				board.push([]);
+				for (let j = 0; j < nCol; j++) {
+					board[i][j] = "";
+					document.getElementById(`cell_${i}_${j}`).innerHTML = "";
+				}
+			}
+			board[playerRow][playerCol] = "player";
+			document.getElementById(`cell_${playerRow}_${playerCol}`).innerHTML = "<img id='player' class='baseimg' src='thief.png'>";
+			for (let i = 0; i < nCoins; i++) {
+				let cell = getRandomCell();
+				while (board[cell.row][cell.col] !== "") {
+					cell = getRandomCell();
+				}
+				board[cell.row][cell.col] = "coin";
+				document.getElementById(`cell_${cell.row}_${cell.col}`).innerHTML = "<img class='baseimg' src='coin.png'>";
+			}
+			setBombs();
+		}
+		function setBombs() {
+			for (let i = 0; i < nCoins; i++) {
+				let cell = getRandomCell();
+				while (board[cell.row][cell.col] !== "") {
+					cell = getRandomCell();
+				}
+				board[cell.row][cell.col] = "bomb";
+				document.getElementById(`cell_${cell.row}_${cell.col}`).innerHTML = "<img class='baseimg' src='bomb.png'>";
+			}
+		}
+		function explodeBomb(cellRow, cellCol) {
+			if (cellRow >= 0 && cellRow < nRow && cellCol >= 0 && cellCol < nCol) {
+				if (board[cellRow][cellCol] === "coin") {
+					coinsCollected--;
+				}
+				board[cellRow][cellCol] = "";
+				document.getElementById(`cell_${cellRow}_${cellCol}`).innerHTML = "";
+			}
+		}
+		function revert_explodedBomb(cellRow, cellCol) {
+			if (cellRow >= 0 && cellRow < nRow && cellCol >= 0 && cellCol < nCol) {
+				if (board[cellRow][cellCol] === "") {
+					board[cellRow][cellCol] = "bomb";
+					document.getElementById(`cell_${cellRow}_${cellCol}`).innerHTML = "<img class='baseimg' src='bomb.png'>";
+				}
+			}
+		}
+		function displayEnd(condId) {
+			document.getElementById(condId).style.display = "block";
+		}
+		function movement(event) {
+			let newRow = playerRow;
+			let newCol = playerCol;
+			if (event.key === 'ArrowDown' && playerRow + 1 < nRow) {
+				newRow = playerRow + 1;
+			} else if (event.key === 'ArrowUp' && playerRow - 1 >= 0) {
+				newRow = playerRow - 1;
+			} else if (event.key === 'ArrowRight' && playerCol + 1 < nCol) {
+				newCol = playerCol + 1;
+			} else if (event.key === 'ArrowLeft' && playerCol - 1 >= 0) {
+				newCol = playerCol - 1;
+			}
+			if (newRow !== playerRow || newCol !== playerCol) {
+				const currentCell = board[playerRow][playerCol];
+				board[playerRow][playerCol] = "";
+				document.getElementById(`cell_${playerRow}_${playerCol}`).innerHTML = "";
+				if (currentCell === "coin") {
+					coinsCollected--;
+				}
+				playerRow = newRow;
+				playerCol = newCol;
+				board[playerRow][playerCol] = "player";
+				document.getElementById(`cell_${playerRow}_${playerCol}`).innerHTML = "<img id='player' class='baseimg' src='thief.png'>";
+				if (board[playerRow][playerCol] === "bomb") {
+					displayEnd("lost");
+					return;
+				}
+				if (coinsCollected === nCoins) {
+					displayEnd("victory");
+				}
+			}
+		}
+		function restartGame() {
+			board = [];
+			coinsCollected = 0;
+			playerRow = 0;
+			playerCol = 0;
+			document.getElementById("victory").style.display = "none";
+			document.getElementById("lost").style.display = "none";
+			generateBoard();
+		}
+	</script>
+</head>
+<body>
+	<div id="victory" class="notification"> You Win! <br> <button onclick="restartGame()">Restart</button> </div>
+	<div id="lost" class="notification" style="background-color: red;"> You Lost! <br> <button onclick="restartGame()">Restart</button> </div>
+	<script type="text/javascript">
+		document.write("<table>");
+		for (let i = 0; i < nRow; i++) {
+			document.write("<tr>");
+			for (let j = 0; j < nCol; j++) {
+				document.write(`<td id='cell_${i}_${j}'></td>`);
+			}
+			document.write("</tr>");
+		}
+		document.write("</table>");
+		generateBoard();
+		document.addEventListener("keydown", movement);
+	</script>
+</body>
+</html>
