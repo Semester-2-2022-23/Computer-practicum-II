@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Contact</title>
+</head>
+<body>
+
+<hr>
+<head>
+	<h2>Contact Us</h2>
+</head>
+<hr>
+
+<form action="/action_page.php" method="get">
+<!-- Appends the form data to the URL, in name/value pairs -->
+<!-- <form action="/action_page.php" method="post"> -->
+<!-- Appends the form data inside the body of the HTTP request (the submitted form data is not shown in the URL) -->
+	<fieldset>
+	<legend>Personal Infomation:</legend>
+		<label for="fname">First Name:</label><br>
+		<input type="text" id="fname" name="fname"><br>
+
+		<label for="lname">Last Name:</label><br>
+		<input type="text" id="lname" name="lname"><br>
+
+		<label for="email">e-mail:</label><br>
+		<input type="email" id="email" name="email"><br>
+
+		<label for="gender">Gender:</label><br>
+		<input type="radio" id="male" name="gender" value="its_male">
+		<label for="male">Male</label><br>
+		<input type="radio" id="female" name="gender" value="its_female">
+		<label for="female">Female</label><br>
+		<input type="radio" id="Other" name="gender" value="its_other">
+		<label for="other">Other</label><br>
+	</fieldset>
+
+	<fieldset>
+	<legend>Movies:</legend>
+		<div style="float: left;">
+		  <input type="checkbox" id="mov1" name="mov1" value="Kungfu">
+		  <label for="mov1"> I Like Kungfu Panda</label><br>
+		  <input type="checkbox" id="mov2" name="mov2" value="Minions">
+		  <label for="mov2"> I Like Minions</label><br>
+		  <input type="checkbox" id="mov3" name="mov3" value="Monster Inc.">
+		  <label for="mov3"> I Like Monster Inc.</label><br>
+		  <input type="checkbox" id="mov4" name="mov4" value="Trolls">
+		  <label for="mov4"> I Like Trolls</label><br>
+		</div>
+		<div>
+		  <input type="checkbox" id="mov5" name="mov5" value="Croods">
+		  <label for="mov5"> I Like Croods</label><br>
+		  <input type="checkbox" id="mov6" name="mov6" value="Coco">
+		  <label for="mov6"> I Like Coco</label><br>
+		  <input type="checkbox" id="mov7" name="mov7" value="Encanto">
+		  <label for="mov7"> I Like Encanto</label><br>
+		  <input type="checkbox" id="mov8" name="mov8" value="Sing">
+		  <label for="mov8"> I Like Sing</label><br>
+		</div>
+	</fieldset>
+
+	<fieldset>
+	<legend>Favourite Movie:</legend> 
+		<select id="fav_movie" name="fav_movie">
+		  <option value="volvo">Kungfu Panda</option>
+		  <option value="saab">Minions</option>
+		  <option value="fiat">Monster Inc.</option>
+		  <option value="audi">Trolls</option>
+		  <option value="volvo">Croods</option>
+		  <option value="saab">Coco</option>
+		  <option value="fiat">Encanto</option>
+		  <option value="audi">Sing</option>
+		</select>
+	</fieldset>
+
+	<fieldset>
+	<legend>Send Message:</legend>
+		<label for="subject">Subject:</label><br>
+		<textarea name="subject" rows="1" cols="30">
+		</textarea><br>
+
+		<label for="message">Message:</label><br>  	
+		<textarea name="message" rows="10" cols="30">Enter your message here.</textarea><br>
+
+		<input type="date" id="date" name="date">
+	</fieldset>
+
+
+	<br>
+	<input type="submit" value="Submit">
+</form>
+<br>
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13209.242263737007!2d-118.3633434302246!3d34.13839580000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2bfba8c523017%3A0x92714be1ed9117fc!2sKung%20Fu%20Panda%20Adventure!5e0!3m2!1snl!2ssi!4v1678210286181!5m2!1snl!2ssi" width="400" height="250"></iframe>
+
+<br>
+<br>
+<a href="../introduction.html" style="background-color:black;color:white;"><< Back</a>
+
+<hr>
+<footer>
+	<h4>All rights reserved CPII. 2023</h4>
+</footer>
+<hr>
+
+</body>
+</html>
