@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Student Information</title>
+        <style>
+            form{
+                width: 50%;
+                margin: auto;
+                padding: 20px;
+            }
+            label {
+                display: inline-block;
+                width: 160px;
+            }
+            input {
+                width: 200px;
+            }
+            input[type="button"] {
+                width: 100px;
+            }
+            input:invalid {
+                background-color: lightcoral;
+            }
+            select {
+                width: 200px;
+            }
+
+
+        </style>
+        <script>
+
+            programs={
+                "Bachelor's":
+                ["Mathematics","Computer Science","Bioinformatics"],
+                "Master's":["Computer Science","Mathematical Sciences","Data Science"],
+                "Doctoral":
+                ["Mathematical Sciences","Computer Science"],
+                "Other":[]
+            };
+
+            
+
+
+        </script>
+    </head>
+
+    <body>
+        <form method="POST" action="target.html" id="formID">
+            <fieldset>
+            <div>
+                <label>Student Name:</label>
+                <input type="text" placeholder="Student Name" id="name">
+            </div>
+            <div>
+                <label>Date of Birth:</label>
+                <input type="date">
+            </div>
+            <div>
+                <label>Tel. No.:</label>
+                <input type="tel" placeholder="000-000-000">
+            </div>
+            <div>
+                <label>E-mail:</label>
+                <input type="email" placeholder="studentNo@student.upr.si" id="email">
+            </div>
+            </fieldset>
+
+            <fieldset>
+            <div>
+                <label>Study Program:</label>
+                <select id="program">
+                    <option>Bachelor's</option>
+                    <option>Master's</option>
+                    <option>Doctoral</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div>
+                <label>Subjects:</label>
+                <select id="subject">
+                </select>
+            </div>
+            </fieldset>
+            </fieldset>
+
+            <input type="submit" value="Confirm">
+             <div id="info" style="color: red;"></div>
+        </form>
+    </body>
+</html>
