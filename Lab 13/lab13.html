@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+  div {
+    float: left;
+    width: 25vw;
+    height: 40vw;
+    border: 1px solid white;
+    background-color: #7F7F7F;
+    margin: 10px;
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .square {
+    width: 17vw;
+    height: 50px;
+    background-color: #595959;
+    font-size: 2vw;
+    color: white;
+    text-align: center;
+    border: dotted;
+    margin-top: 0; 
+    margin-bottom: 0;
+/*    margin-left: 10%;*/
+  }
+  h2{
+    color: white;
+    text-align: center;
+    margin-bottom: 0;
+    padding: 10px;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    position: relative;
+    top: 0;
+    
+  }
+  #todo{
+    background-color: black;
+  }
+  #progress{
+    background-color: #F3A83B;
+  }
+  #done{
+    background-color: green;
+  }
+</style>
+<script>
+  function allowDrop(event) {
+    event.preventDefault();
+  }
+  function drag(event, dragdivNumber) {
+    event.dataTransfer.setData("divNumber", dragdivNumber.toString());
+  }
+
+  function drop(event, dropdivNumber) {
+    event.preventDefault();
+
+    targetCell=event.target;
+    if (targetCell.classList.contains("square"))
+      targetCell = targetCell.parentNode;
+
+    divNumber = event.dataTransfer.getData("divNumber");
+    draggedSquareId="square"+divNumber;
+    draggedSquare=document.getElementById(draggedSquareId);
+
+    targetCell.appendChild(draggedSquare);
+
+    if (targetCell.id === "cell1") {
+      document.getElementById("square"+divNumber).style.backgroundColor="#595959";
+    } else if (targetCell.id === "cell2") {
+      document.getElementById("square"+divNumber).style.backgroundColor="#A4966E";
+    } else if (targetCell.id === "cell3") {
+      document.getElementById("square"+divNumber).style.backgroundColor="#7CA470";
+    }
+  }
+
+</script>
+</head>
+
+
+<body>
+
+
+<div id="cell1" ondragover="allowDrop(event)" ondrop="drop(event,1)">
+  <h2 id="todo">To Do</h2>
+  <div class="square" id="square1" draggable="true" ondragstart="drag(event,1)">#1</div>
+  <div class="square" id="square2" draggable="true" ondragstart="drag(event,2)">#2</div>
+  <div class="square" id="square3" draggable="true" ondragstart="drag(event,3)">#3</div>
+</div>
+
+<div id="cell2" ondragover="allowDrop(event)" ondrop="drop(event,2)">
+  <h2 id="progress">In Progress</h2>
+  <div class="square" id="square4" draggable="true" ondragstart="drag(event,4)">#4</div>
+  <div class="square" id="square5" draggable="true" ondragstart="drag(event,5)">#5</div>
+</div>
+
+<div id="cell3" ondragover="allowDrop(event)" ondrop="drop(event,3)">
+  <h2 id="done">Done</h2>
+</div>
+
+
+</body>
+</html>

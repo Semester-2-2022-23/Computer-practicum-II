@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Task 10</title>
+	<style>
+		body{
+			font-size:20px;
+			text-align:center;
+			font-family:Arial, Helvetica, sans-serif;
+		}
+		button{
+			font-size:17px;
+		}
+		hr{
+			clear:both;
+			margin-top:0.5em;
+			margin-bottom:0.5em;
+		}
+		#plane{
+			border:3px solid black;
+			background-color:rgba(255,0,0,0.75);
+			width:50em;
+			height:25em;
+			position:relative;
+			margin:auto;
+			margin-top:2em;
+			margin-bottom:4.5em;
+		}
+		.circle{
+			border:0.1em solid black;
+			background-color:green;
+			width:2em;
+			height:2em;
+			border-radius:50%;
+			position:absolute;
+		}
+	</style>
+	</head>
+	<body>
+		<h1 style="font-size: 50px;">Task 10</h1>
+		<p>
+			Complete the following workbook.<br>
+		</p>
+		<hr/>
+		<h1>Pre Task*</h1>
+		<p>
+			1.Take a number<b><em>n</em></b>as input from the user (use an input HTML element).
+			<br>2.Display a square with width and height of<b><em>n</em></b>pixels and its area (in pixels).<br>
+		</p>
+	<script>
+		function processInput(){
+			let input = document.getElementById("input1").value;
+			input = Number(input);
+			if (!isNaN(input)){
+				document.getElementById("square").style.width = input + "px";
+				document.getElementById("square").style.height = input + "px";
+				document.getElementById("areaInfo").innerHTML = 'Area=' + input * input + ' pixels';
+			}
+		}
+	</script>
+			<input id="input1">
+			<button onclick="processInput();">Generate</button>
+			<div id="square"></div>
+			<div id="areaInfo">Area=</div>
+			<hr/>
+			<h1>Task 10</h1>
+			<p>The instructor will explain the task.</p>
+	<script type="text/javascript">
+			const widthOfPlane = 50;
+			const heightOfPlane = 25;
+			const circleDiameter = 2.1; 
+			const maxX = (1 - (circleDiameter / widthOfPlane)) * 100;
+			const maxY = (1 - (circleDiameter / heightOfPlane)) * 100;
+			let dropInterval = undefined;
+			let selectedDiv = undefined;
+			let xPositionSelected = 0;
+			let yPositionSelected = 0;
+			function getPercNumber(valueString){
+			return Number(valueString.replace('%', ''));
+		}
+			function getPercInputValue(inputId) {
+			let val = document.getElementById(inputId).value;
+			val = Number(val);
+			if (!isNaN(val)){
+			return Math.min(Math.max(val, 0), maxX);
+		} else{
+			return 0;
+		}
+	}
+			function drop(){
+			document.getElementById('button').disabled = true;
+			const circles = document.getElementsByClassName('circle');
+			for (let i = 0; i < circles.length; i++){
+			circles[i].style.backgroundColor = 'gray';
+		}
+			selectedDiv = document.createElement("div");
+			selectedDiv.className = "circle";
+			document.getElementById("plane").appendChild(selectedDiv);
+			xPositionSelected = getPercInputValue("inputX");
+			yPositionSelected = getPercInputValue("inputY");
+			selectedDiv.style.left = xPositionSelected + "%";
+			selectedDiv.style.top = yPositionSelected + "%";
+			dropInterval = setInterval(move, 10);
+	}
+		function move(){
+		if (yPositionSelected >= maxY){
+			clearInterval(dropInterval);
+			document.getElementById('button').disabled = false;
+		} else{
+			yPositionSelected += 0.2;
+			selectedDiv.style.top = yPositionSelected + "%";
+		}
+	}
+		</script>
+			left = <input type="text" id="inputX" value="0">%<br>
+			top = <input type="text" id="inputY" value="0">%<br>
+			<button onclick="drop();" id="button">Drop</button>
+			<div id="plane"></div>
+	</body>
+	</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Snake Game - Instructions</title>
+  <style>
+    /*Style for the page*/
+    body {
+      background-image: linear-gradient(to bottom right, #D4D700, #2DC653);
+      color: black;
+      text-align: left;
+      font-family: Arial, sans-serif;
+      font-size: 24px;
+      background-attachment: fixed;
+    }
+    /*Style for the title*/
+    h1 {
+      font-size: 80px;
+      margin-top: 50px;
+      text-align: center;
+      font-family: Font;
+    }
+    @font-face {
+      font-family: "Font";
+      src: url('font.ttf');
+    }
+    /*Font size and margins for paragraphs*/
+    .round {
+      background-color: #007200;
+      border: 2px solid #70E000;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 24px;
+      margin: 0 auto;
+      max-width: 500px;
+      color: whitesmoke;
+      text-align: justify;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    /*Add dots to the list*/
+    ul.round {
+      list-style: disc;
+      padding: 0;
+      margin: 0 auto;
+      max-width: 600px;
+    }
+    /*Remove the border from the list items*/
+    ul.round li {
+      border: none;
+      padding: 5px;
+      margin: 5px;
+    }
+    /*Button style*/
+    .backbutton {
+      background-color: #10451D;
+      color: whitesmoke;
+      padding: 20px 40px;
+      font-size: 24px;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      border-radius: 10px;
+      position: absolute;
+      background-color: #10451D;
+      left: 20px;
+      bottom: 20px;
+    }
+    .backbutton:hover {
+      background-color: red;
+    }
+    /*Adjust button size and margin for smaller screens*/
+    @media only screen and (max-width: 600px) {
+      .backbutton {
+        font-size: 18px;
+        margin-top: 10px;
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Main heading -->
+  <h1><span style="color: whitesmoke;">Instructions</span></h1>
+  <div class="round">
+    <!-- Instructions paragraph -->
+    <p>The objective of the game is to eat the food. Every time the snake eats an apple, you score points. The more
+      apples you eat, the higher your score will be. Move the snake towards the screen to eat the apples. The food will
+      randomly appear on the screen, and each time the snake eats it, its length will increase.</p>
+    <!-- Control instructions paragraph -->
+    <p>Use the arrow keys to control the snake:</p>
+    <!-- Unordered list of control instructions -->
+    <ul>
+      <li>Up arrow: Move up</li>
+      <li>Down arrow: Move down</li>
+      <li>Left arrow: Move left</li>
+      <li>Right arrow: Move right</li>
+    </ul>
+    <!-- Instruction for restarting the game -->
+    <p>The game is over when the snake hits a wall or its own body. Your final score will be displayed on the screen.
+      Press the "Restart" button on the screen to restart the game after it's over or by refreshing the page.</p>
+    <p style="text-align:center; margin-top: 20px;">Have fun! The goal of the game is to have fun and challenge yourself
+      to get a high score.</p>
+  </div>
+  <a class="backbutton" href="title.html">Back</a>
+</body>
+</html>

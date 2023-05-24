@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Snake Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /*Style for the entire page*/
+    body {
+      background-image: linear-gradient(to bottom right, #D4D700, #2DC653);
+      background-attachment: fixed;
+      color: whitesmoke;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 24px;
+    }
+    /*Style for the title*/
+    h1 {
+      font-size: 80px;
+      margin-top: 50px;
+      font-family: Font;
+    }
+    @font-face {
+      font-family: "Font";
+      src: url('font.ttf');
+    }
+    /*Style for the first letter of the title*/
+    h1 span:first-letter {
+      color: #22577A;
+    }
+    /*Style for the paragraphs*/
+    p {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+    /*Style for the buttons*/
+    .button {
+      display: inline-block;
+      background-color: #10451D;
+      color: white;
+      font-size: 24px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 50px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      /*Make the button responsive*/
+      max-width: 250px;
+      box-sizing: border-box;
+      width: 200px;
+    }
+    /*Hover style for the buttons*/
+    .button:hover {
+      background-color: red;
+    }
+    /*Style for the dropdown container*/
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    /*Style for the dropdown content*/
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      z-index: 1;
+    }
+    /*Style for the table within the dropdown*/
+    .dropdown-content table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 10px;
+      margin-left: 28%;
+    }
+    /*Style for the table header within the dropdown*/
+    .dropdown-content table th {
+      background-color: blue;
+      color: white;
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+    /*Style for the table data within the dropdown*/
+    .dropdown-content table td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+    .dropdown-content table td a{
+      width: 150px;
+    }
+    /*Style of the dropdown content when the dropdown is hovered over*/
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    /*Style of the start button when the dropdown is hovered over*/
+    .dropdown:hover .start-button {
+      display: block;
+    }
+    /*Style for the start button*/
+    .start-button {
+      display: none;
+      background-color: #10451D;
+      color: white;
+      font-size: 24px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
+      width: 50%;
+      max-width: 100px;
+      box-sizing: border-box;
+    }
+    #snakeimageontop {
+      position: absolute;
+      top: 0;
+      left: 10%;
+    }
+  </style>
+</head>
+<body>
+  <!-- Page title -->
+  <h1><span style="color:#22577A">S</span>nake game</h1>
+  <!-- Snake image -->
+  <div id="snakeimageontop">
+    <img src="snake.png" alt="snake image">
+  </div>
+  <!-- Welcome message -->
+  <h2>Welcome to the Snake Game!</h2>
+  <!-- Buttons -->
+  <a href="game.html"><button class="button">Start game</button></a>
+  <a href="instructions.html"><button class="button">Instructions</button></a>
+  <a class="button" href="title.html">Restart</a>
+</body>
+</html>

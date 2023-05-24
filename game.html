@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Snake Game</title>
+  <style>
+    /*Style for the page*/
+    body {
+      background-image: linear-gradient(to bottom right, #D4D700, #2DC653);
+      color: whitesmoke;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 24px;
+      background-attachment: fixed;
+    }
+    /*Game-board*/
+    .game {
+      position: relative;
+      width: 600px;
+      height: 600px;
+      margin: 150px auto;
+      /*Set the background color for the game-board*/
+      background-color: #93E5AB;
+      border: 10px solid green;
+      border-radius: 10px;
+    }
+    /*Blue snake*/
+    .snake {
+      width: 20px;
+      height: 20px;
+      /*The snake's color to be blue*/
+      background-color: #22577A;
+      /*Make the snake rounded*/
+      border-radius: 10px;
+      position: absolute;
+      /*Initial position of the snake*/
+      top: 400px;
+      left: 300px;
+    }
+    /*Red apple*/
+    .apple {
+      width: 25px;
+      height: 30px;
+      position: absolute;
+      /*Initial position of the apple*/
+      top: 150px;
+      left: 150px;
+      /*The apple's color to be red*/
+      background-color: red;
+      /*Make the apple round*/
+      border-radius: 50%;
+    }
+    /*Yellow obstacle*/
+    .obstacle {
+      position: absolute;
+      /*The obstacles's color to be orange*/
+      background-color: orange;
+    }
+    /*First obstacle*/
+    .obstacle-1 {
+      width: 120px;
+      height: 20px;
+      /*Initial position of the obstacle*/
+      top: 200px;
+      left: 300px;
+      /*Make the obstacle slightly rounded*/
+      border-radius: 20px;
+    }
+    /*Second obstacle*/
+    .obstacle-2 {
+      width: 90px;
+      height: 20px;
+      /*Initial position of the obstacle*/
+      top: 250px;
+      left: 100px;
+      /*The obstacle to be more rounded*/
+      border-radius: 20px;
+    }
+    /*Third obstacle*/
+    .obstacle-3 {
+      width: 70px;
+      height: 20px;
+      /*Initial position of the obstacle*/
+      top: 550px;
+      left: 200px;
+      border-radius: 20px;
+    }
+    /*Fourth obstacle*/
+    .obstacle-4 {
+      width: 80px;
+      height: 20px;
+      /*Initial position of the obstacle*/
+      top: 100px;
+      left: 400px;
+      /*Make the obstacle slightly rounded*/
+      border-radius: 20px;
+    }
+    /*Fifth obstacle*/
+    .obstacle-5 {
+      width: 110px;
+      height: 20px;
+      /*Initial position of the obstacle*/
+      top: 400px;
+      left: 500px;
+      /*Make the obstacle slightly rounded*/
+      border-radius: 20px;
+    }
+    /*Sixth obstacle*/
+    .obstacle-6 {
+      width: 60px;
+      height: 20px;
+      /*Initial position of the obstacle*/
+      top: 350px;
+      left: 50px;
+      /*Make the obstacle slightly rounded*/
+      border-radius: 20px;
+    }
+    /*Seventh obstacle*/
+    .obstacle-7 {
+      width: 150px;
+      height: 20px;
+      /*Initial position of the obstacle*/
+      top: 450px;
+      left: 200px;
+      /*Make the obstacle slightly rounded*/
+      border-radius: 20px;
+    }
+    /*Eighth obstacle*/
+    .obstacle-8 {
+      width: 100px;
+      height: 20px;
+      /*Initial position of the obstacle*/
+      top: 50px;
+      left: 250px;
+      /*Make the obstacle slightly rounded*/
+      border-radius: 20px;
+    }
+    /*Restart button*/
+    .restart-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 20px 40px;
+      background-color: #10451D;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 24px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .restart-button:hover {
+      background-color: red;
+      cursor: pointer;
+    }
+    /*Timer*/
+    .timer {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 25px;
+    }
+    /*Final score*/
+    .finalScore {
+      position: absolute;
+      top: 50px;
+      left: 20px;
+      font-size: 25px;
+    }
+    /*Button style*/
+    .backbutton {
+      position: absolute;
+      background-color: #10451D;
+      border-radius: 8px;
+      color: whitesmoke;
+      padding: 20px 40px;
+      font-size: 24px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      bottom: 20px;
+      margin-left: -3%;
+    }
+    .backbutton:hover {
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="game">
+    <div class="snake"></div> <!-- Snake element -->
+    <div class="apple"></div> <!-- Apple element -->
+    <div class="obstacle obstacle-1"></div> <!-- First obstacle element -->
+    <div class="obstacle obstacle-2"></div> <!-- Second obstacle element -->
+    <div class="obstacle obstacle-3"></div> <!-- Third obstacle element -->
+    <div class="obstacle obstacle-4"></div> <!-- Fourth obstacle element -->
+    <div class="obstacle obstacle-5"></div> <!-- Fifth obstacle element -->
+    <div class="obstacle obstacle-6"></div> <!-- Sixth obstacle element -->
+    <div class="obstacle obstacle-7"></div> <!-- Seventh obstacle element -->
+    <div class="obstacle obstacle-8"></div> <!-- Eighth obstacle element -->
+  </div>
+  <a class="restart-button" href="game.html">Restart</a> <!-- Restart button -->
+  <div class="timer">
+    Timer: <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>.<span id="milliseconds">00</span>
+  </div>
+  <div class="finalScore">Final Score: <span id="final-score">0</span></div> <!-- Display final score -->
+  <a class="backbutton" href="title.html">Back</a>
+  <script>
+    //JavaScript code for the game functionality
+    //Get the game elements
+    const game = document.querySelector('.game');
+    const snake = document.querySelector('.snake');
+    const apple = document.querySelector('.apple');
+    const obstacles = document.querySelectorAll('.obstacle');
+    //Set initial position and direction for the snake
+    let snakeX = 300;
+    let snakeY = 400;
+    let snakeDirection = 'right';
+    let snakeSize = 1;
+    //This part of the code is something from high school
+    //Set the size of each snake segment (ball)
+    const segmentSize = 20;
+    //Initialize timer variables
+    let hours = 0;
+    let minutes = 0;
+    let seconds = 0;
+    let milliseconds = 0;
+    let timerInterval = null;
+    //Function to update the snake's position
+    function updateSnakePosition() {
+      //Check if the snake hits the game borders
+      if (
+        snakeX < 0 ||
+        snakeY < 0 ||
+        snakeX >= game.offsetWidth ||
+        snakeY >= game.offsetHeight
+      ) {
+        //Game over, handle the logic here
+        gameOver();
+        return;
+      }
+      //Check if the snake hits any of the obstacles
+      obstacles.forEach((obstacle) => {
+        if (checkCollision(snake, obstacle)) {
+          //Snake collided with an obstacle, stop the game
+          gameOver();
+          return;
+        }
+      });
+      //Update the snake's position based on the direction
+      if (snakeDirection === 'right') {
+        snakeX += segmentSize;
+      } else if (snakeDirection === 'left') {
+        snakeX -= segmentSize;
+      } else if (snakeDirection === 'up') {
+        snakeY -= segmentSize;
+      } else if (snakeDirection === 'down') {
+        snakeY += segmentSize;
+      }
+      //This part of the code is something from high school
+      //Update the snake's style to reflect the new position
+      snake.style.left = snakeX + 'px';
+      snake.style.top = snakeY + 'px';
+      //Check if the snake eats the apple
+      if (checkCollision(snake, apple)) {
+        //Snake ate the apple, increase the size
+        snakeSize++;
+        //Update the score display
+        const finalScoreElement = document.getElementById('final-score');
+        finalScoreElement.textContent = snakeSize.toString();
+        //Generate a new random position for the apple
+        generateApplePosition();
+      }
+    }
+    //Function to generate a new random position for the apple
+    function generateApplePosition() {
+      const maxWidth = game.offsetWidth - apple.offsetWidth;
+      const maxHeight = game.offsetHeight - apple.offsetHeight;
+      const newAppleX = Math.floor(Math.random() * maxWidth);
+      const newAppleY = Math.floor(Math.random() * maxHeight);
+      apple.style.left = newAppleX + 'px';
+      apple.style.top = newAppleY + 'px';
+    }
+    //This part of the code is something from high school
+    //Function to check collision between two elements
+    function checkCollision(element1, element2) {
+      const rect1 = element1.getBoundingClientRect();
+      const rect2 = element2.getBoundingClientRect();
+      return (
+        rect1.left < rect2.right &&
+        rect1.right > rect2.left &&
+        rect1.top < rect2.bottom &&
+        rect1.bottom > rect2.top
+      );
+    }
+    //Function to handle arrow key input
+    function handleKeyDown(event) {
+      if (event.key === 'ArrowUp' && snakeDirection !== 'down') {
+        snakeDirection = 'up';
+      } else if (event.key === 'ArrowDown' && snakeDirection !== 'up') {
+        snakeDirection = 'down';
+      } else if (event.key === 'ArrowLeft' && snakeDirection !== 'right') {
+        snakeDirection = 'left';
+      } else if (event.key === 'ArrowRight' && snakeDirection !== 'left') {
+        snakeDirection = 'right';
+      }
+    }
+    //Function to start the game and timer
+    function startGame() {
+      //Add event listener for arrow key input
+      document.addEventListener('keydown', handleKeyDown);
+      //Generate initial position for the apple
+      generateApplePosition();
+      //Start the timer
+      timerInterval = setInterval(updateTimer, 10);
+      //Start the game loop
+      gameLoop();
+    }
+    //Function to stop the game and timer
+    function stopGame() {
+      //Remove event listener for arrow key input
+      document.removeEventListener('keydown', handleKeyDown);
+      //Stop the timer
+      clearInterval(timerInterval);
+    }
+    //Game loop function
+    function gameLoop() {
+      //Update the snake's position
+      updateSnakePosition();
+      //Call the game loop again after a short delay
+      setTimeout(gameLoop, 100);
+    }
+    //Game over function
+    function gameOver() {
+      //Stop the game and timer
+      stopGame();
+      //Show game over message
+      alert('Game over!');
+    }
+    //Function to update the timer display
+    function updateTimer() {
+      milliseconds += 10;
+      if (milliseconds === 100) {
+        milliseconds = 0;
+        seconds++;
+      }
+      if (seconds === 60) {
+        seconds = 0;
+        minutes++;
+      }
+      if (minutes === 60) {
+        minutes = 0;
+        hours++;
+      }
+      const hoursElement = document.getElementById('hours');
+      const minutesElement = document.getElementById('minutes');
+      const secondsElement = document.getElementById('seconds');
+      const millisecondsElement = document.getElementById('milliseconds');
+      hoursElement.textContent = padZero(hours);
+      minutesElement.textContent = padZero(minutes);
+      secondsElement.textContent = padZero(seconds);
+      millisecondsElement.textContent = padZero(milliseconds);
+    }
+    //Function to pad zeros to single-digit numbers in the timer
+    function padZero(number) {
+      return number.toString().padStart(2, '0');
+    }
+    //Start the game when the page is loaded
+    startGame();
+  </script>
+</body>
+</html>

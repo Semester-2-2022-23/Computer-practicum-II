@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style> 
+.grid-container {
+  display: grid;
+  column-gap: 100px;
+  width: 200px;
+  height: 200px;
+  position: relative;
+}
+
+.grid-item {
+  width: 50px;
+  height: 50px;
+  background-color: purple;
+  border-radius: 100%;
+  position: absolute;
+  border: 1px solid blue;
+  box-sizing: border-box;
+  animation: move-up 4s infinite;
+  margin: 100px;
+}
+
+@keyframes move-up {
+  from { 
+    top: 200px;
+    transform: translateY(0px);
+    background-color: lightpink;
+  }
+  to {
+    top: 0px;
+    transform: translateYS(-300px);
+    background-color: ghostwhite;
+  }
+}
+
+.grid-item:nth-child(1) {
+  animation-delay: 0s;
+  left: 50px;
+}
+
+.grid-item:nth-child(2) {
+  animation-delay: 0.5s;
+  left: 100px;
+}
+
+.grid-item:nth-child(3) {
+  animation-delay: 1s;
+  left: 150px;
+}
+</style>
+</head>
+<body>
+
+<div class="grid-container">
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+</div>
+
+</body>
+</html>
