@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Midterm Q1</title>
+	<style type="text/css">
+		.button {
+			display: inline-block;
+			width: 100px;
+			height: 30px;
+			background-color: black;
+			color: white;
+			border: 1px solid white;
+			text-align: center;
+			margin: 1px;
+			font-size: 10px;
+		}
+
+		.output {
+			width: 150px;
+			height: 30px;
+			border: 1px solid black;
+			font-size: 20px;
+			text-align: center;
+		}
+
+		div {
+			padding: 10px;
+		}
+
+		.number-list {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		.number-list li {
+			width: 100%;
+			height: 20px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border: 1px solid black;
+			margin: 2px;
+			font-size: 12px;
+		}
+
+		.number-list li.odd {
+			background-color: blue;
+			color: white;
+		}
+
+		.number-list li.even {
+			background-color: green;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<label for="name">Enter Max No:</label>
+		<input type="text" id="maxNoInput">
+		<div id="numberListContainer">
+			<ul id="numberList" class="number-list"> 
+			</ul>
+			</div>
+		</div>
+		<button class="button" id="printButton">Print</button>
+		<button class="button" id="removeButton">Remove</button>
+
+		<div>
+			<label for="displayoddsum">Odd Sum:</label>
+			<div class="output" id="oddSumOutput"></div>
+		</div>
+
+		<script>
+			const printButton = document.getElementById("printButton");
+			const removeButton = document.getElementById("removeButton");
+			const maxNoInput = document.getElementById("maxNoInput");
+			const numberList = document.getElementById("numberList");
+			const oddSumOutput = document.getElementById("oddSumOutput");
+
+			printButton.addEventListener("click", function() {
+				const maxNo = parseInt(maxNoInput.value);
+				numberList.innerHTML = ""; // Clear the previous list
+
+				let oddSum = 0;
+				for (let i = 1; i <= maxNo; i++) {
+					const li = document.createElement("li");
+					li.textContent = i;
+					numberList.appendChild(li);
+
+					if (i % 2 === 1) {
+						li.classList.add("odd");
+						oddSum += i;
+					} else {
+						li.classList.add("even");
+					}
+				}
+
+				oddSumOutput.textContent = oddSum;
+			});
+
+			removeButton.addEventListener("click", function() {
+				numberList.innerHTML = ""; // Clear the list
+				oddSumOutput.textContent = "";
+			});
+		</script>
+	</body>
+</html>
