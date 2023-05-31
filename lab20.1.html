@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Midterm Q2</title>
+    <style>
+      .bar {
+        display: inline-block;
+        font-size: 30px;
+        color: black;
+      }
+      .container {
+        padding: 20px;
+        width: 450px;
+        text-align: center;
+      }
+      button {
+        width: 80px;
+        height: 50px;
+        color: white;
+        background-color: black;
+        font-size: 20px;
+        border-radius: 10px;
+      }
+      #slider {
+          width: 450px;
+          height: 10px;
+          background-color: black;
+          margin-top: 10px;
+          border-radius: 10px;
+      }
+      #ball {
+        position: relative;
+        width: 30px;
+        height: 30px;
+        background-color: red; 
+        border-radius: 50%;    
+        left: 0px;
+        top: -10px;
+      }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Music Player</h1>
+  </div>
+  <div class="bar">0.00</div>
+  <div class="bar" id="slider">
+    <div id="ball"></div>
+  </div>
+  <div class="bar">0.90</div>
+  <div class="container">
+    <button id="playButton">Play</button>
+    <button id="replayButton">Replay</button>
+  </div>
+  <script>
+    const playButton = document.getElementById("playButton");
+    const replayButton = document.getElementById("replayButton");
+    const ball = document.getElementById("ball");
+    const sliderWidth = document.getElementById("slider").clientWidth;
+    const ballWidth = ball.offsetWidth;
+    const distance = sliderWidth - ballWidth;
+    const duration = 5000;
+    playButton.addEventListener("click", function() {
+      console.log("Play button clicked");
+      let currentPosition = 0;
+      const interval = 10; 
+      const steps = duration / interval;
+      const stepSize = distance / steps;
+      const moveBallInterval = setInterval(() => {
+        currentPosition += stepSize;
+        ball.style.left = currentPosition + "px";
+        if (currentPosition >= distance) {
+          clearInterval(moveBallInterval);
+        }
+      }, interval);
+    });
+    replayButton.addEventListener("click", function() {
+      console.log("Replay button clicked");
+      ball.style.left = "0px";
+    });
+  </script>
+</body>
+</html>
