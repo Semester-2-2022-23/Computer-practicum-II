@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Optimized JS</title>
+
+	<style type="text/css">
+		.center {
+			margin: auto;
+			width: 50%;
+			padding: 10px;
+			text-align: center;
+			background-color: black;
+			color: rgba(255, 0, 0, 0.9);
+
+		}
+	
+		#myimg {
+			width:200px
+		}
+
+		#mybtn {
+			background-color: rgba(255, 0, 0, 0.9);
+			border: none;
+			color: white;
+			padding: 16px 32px;
+			text-align: center;
+	
+		}
+		#mybtn:hover {
+			opacity: 0.7
+		}
+		
+	</style>
+	<script type="text/javascript">
+
+		
+		
+		function changeValues(){
+			var header = document.getElementById('mytext');
+			var inputval = document.getElementById('myinput');
+
+			if (header.innerHTML == 'HELLO PANDA'){
+				document.getElementById('myimg').src ='minion.png';
+				document.getElementById('mybtn').style.text ='Goto Minion';
+				document.getElementById('mybtn').style.background
+				 = 'rgba(0, 0, 255, 0.9)';
+				header.innerHTML ='HELLO MINION';
+				header.style.color ='rgba(0, 0, 255, 0.9)';
+				// document.write("MINION");
+
+			}
+
+			else{
+				document.getElementById('myimg').src ='panda.png';
+				document.getElementById('mybtn').style.text ='Goto Panda';
+				document.getElementById('mybtn').style.background
+				 = 'rgba(255, 0, 0, 0.9)';
+				header.innerHTML ='HELLO PANDA';
+				header.style.color = 'rgba(255, 0, 0, 0.9)';
+				// document.write("PANDA");	
+			}
+
+			output(inputval.value);
+			
+		}
+
+		function output(myVal){
+			window.alert(myVal);
+		}
+	</script>
+</head>
+
+<body>
+	
+<div class = "center">
+	<h2 id="mytext">HELLO PANDA</h1>
+	<form>
+		<input type="text" name="myinput" id="myinput">
+	</form>
+</div>
+
+<div class = "center">
+	<img id="myimg" src="Panda.png">
+	<button id="mybtn" onclick="changeValues()">Goto Minion</button>
+</div>
+</body>
+</html>
