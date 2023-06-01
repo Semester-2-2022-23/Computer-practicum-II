@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Table</title>
+    <style>
+        table{
+            width: 30%;
+            border: 1px solid black;
+            border-collapse: collapse;
+            margin: 20px;
+        }
+    </style>
+    <script>
+        function multable(){
+            let table = document.getElementById("tableid");
+            let rownum = document.getElementById("rows").value;
+            let colnum = document.getElementById("cols").value;
+            let rowint = parseInt(rownum)+1;
+            let colint = parseInt(colnum)+1;
+
+            for(i=0; i<=rowint; i++){
+                let row = document.createElement("tr");
+                table.appendChild(row);
+                for(j=0; j<=colint; j++){
+                    let column = document.createElement("td");
+                    column.style.border = "1px solid black";
+                    column.style.borderCollapse = "collapse";
+                    column.style.textAlign = "center";
+                    if((i==0) && (j==0)){
+                        column.innerHTML = "X";
+                        column.style.backgroundColor = "black";
+                        column.style.color = "white";
+                        column.style.borderColor = "white"
+                    } 
+                    else if(i==0){
+                        column.innerHTML =  j-1;
+                        column.style.backgroundColor = "black";
+                        column.style.color = "white";
+                        column.style.borderColor = "white"
+                    }
+                    else if(j==0){
+                        column.innerHTML = i-1;
+                        column.style.backgroundColor = "black";
+                        column.style.color = "white";
+                        column.style.borderColor = "white"
+                    }
+                    else{
+                        let a = (i-1)*(j-1);
+                        column.innerHTML = a;
+                    }
+                    row.appendChild(column);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Multiplication Table</h1>
+    <form>
+        <label for="rows">Rows:</label>
+        <input type="text" name="rows" id="rows">
+
+        <label for="cols">Cols:</label>
+        <input type="text" name="cols" id="cols">
+
+        <input type="button" value="Create" onclick="multable()">
+    </form>
+    <table id="tableid">
+
+    </table>
+</body>
