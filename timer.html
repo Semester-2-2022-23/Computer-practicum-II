@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		#numberdisplay{
+			width: 300px;
+			font-size: 80px;
+			text-align: center;
+			color: purple;
+		}
+
+		#buttoncontainer{
+			width: 300px;
+		}
+
+		button{
+			width: 80px;
+			height: 50px;
+			color: darkblue;
+			background-color: cyan;
+			border-radius: 10px;
+			font-size: 20px;
+		}
+
+		#playarea{
+			margin-top: 10px;
+			width: 300px;
+			height: 200px;
+			background-color: cyan;
+			border: 2px solid purple;
+		}
+
+		#ball{
+			width: 20px;
+			height: 20px;
+			border-radius: 50%;
+			background-color: purple;
+			position: relative;
+			top: 90px;
+			left: 140px;
+		}
+	</style>
+	<script type="">
+		let counter = 0;
+		let intervalID = undefined;
+		animID = null;
+
+		function increaseCounter(){
+			counter++;
+			document.getElementById("numberdisplay").innerHTML = counter;
+		}
+		function startTimer(){
+			clearInterval(animID);
+			if(intervalID === undefined){
+				intervalID = setInterval(increaseCounter, 1000);
+			}
+
+			animID = setInterval(moveBall, 1000*dt);
+
+		}
+		function stopTimer(){
+			if (intervalID !== undefined) {
+				clearInterval(intervalID);
+				clearInterval(animID);
+				intervalID = undefined;
+			}
+
+		}
+		function resetTimer(){
+			stopTimer();
+			startTimer();
+			
+			counter=0;
+			document.getElementById("numberdisplay").innerHTML = counter;
+		}
+
+		let x = 140;
+		let y = 90;
+
+		let xv = 50;
+		let yv = 50;
+
+		let dt = 1/50;
+
+		function moveBall() {
+			x += xv * dt;
+			y += yv * dt;
+
+			if (x >= 280 || x <= 0){
+				xv *= -1;
+			}
+			if (y >= 180 || y <= 0) {
+				yv *= -1;
+			}
+
+			let ballpos = document.getElementById("ball");
+			ballpos.style.left = x+"px";
+			ballpos.style.top = y+"px";
+		}
+
+		function catchBall(){
+			if (intervalID !== undefined) {
+				window.alert("You got it in "+counter);
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="numberdisplay">0</div>
+	<div id="buttoncontainer">
+		<button onclick="startTimer()">Start</button>
+		<button onclick="stopTimer()">Stop</button>
+		<button onclick="resetTimer()">Reset</button>
+	</div>
+
+	<div id="playarea">
+		<div id="ball" onclick="catchBall()"></div>
+	</div>
+
+</body>
+</html>
