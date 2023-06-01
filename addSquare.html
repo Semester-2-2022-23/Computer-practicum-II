@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JS Add Elements</title>
+	<style type="text/css">
+		.square {
+			display: inline-block;
+			width: 50px;
+			height: 50px;
+			background-color: green;
+			border: 1px solid black;
+			text-align: center;
+			margin: 1px;
+			font-size: 30px;
+		}
+		.square:hover {
+			background-color: orange;
+		}
+		#output{
+			width: 100px;
+			height: 30px;
+			border: 1px solid black;
+			font-size: 30px;
+			text-align: center;
+		}
+	</style>
+
+	<script type="text/javascript">
+		let squrecount = 0;
+		function addElements(){
+				let newSquare = document.createElement("div");
+				newSquare.className = "square";
+				newSquare.innerHTML = ++squrecount;
+				newSquare.addEventListener("click", function(){printOut(newSquare.innerHTML)});
+
+				let container = document.getElementById("sqarecontainer");
+				container.appendChild(newSquare);
+
+		}
+
+		function  deleteElements(){
+			let oldsqure = document.getElementById("sqarecontainer");
+
+			oldsqure.removeChild(oldsqure.lastChild);
+
+			let output = document.getElementById("output");
+			output.innerHTML = "";
+		}
+
+		function printOut(number) {
+			let output = document.getElementById("output");
+			output.innerHTML = number;
+
+		}
+
+
+	</script>
+</head>
+<body>
+	<div id="sqarecontainer">
+		<div class="square">1</div>
+		<div class="square">2</div>
+		<div class="square">3</div>
+	</div>
+
+	<button onclick="addElements()">Add Square</button>
+	<button onclick="deleteElements()">Remove Square</button>
+
+	<div id="output"></div>
+
+</body>
+</html>
