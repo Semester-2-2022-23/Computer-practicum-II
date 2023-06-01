@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .seconddiv{
+            float: left;
+            width: 150px;
+            height: 500px;
+            background-color: blue;
+            margin-right: 10px;
+            padding: 10px;
+        }
+        .purpose{
+            width: 100px;
+            height: 35px;
+            text-align: center;
+            color: white;
+            background-color: black;
+            margin: auto;
+        }
+        .numbers{
+            width: 100px;
+            height: 100px;
+            background-color: cornflowerblue;
+            color: white;
+            border: 1px dotted white;
+            text-align: center;
+            font-size: 20px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+    </style>
+    <script>
+        function drag(event, dragdivID){
+            event.dataTransfer.setData("text", dragdivID.toString());
+        }
+        function drop(event, dropdivID){
+            event.preventDefault();
+            let data = event.dataTransfer.getData("text");
+
+            let dragdiv = document.getElementById("sq"+data);
+            let dropdiv = document.getElementById("dropdiv"+dropdivID);
+
+            if(dropdivID==2){
+                dragdiv.style.backgroundColor = "yellow";
+            }
+            else if(dropdivID==3){
+                dragdiv.style.backgroundColor = "green";
+            }
+            else{
+                dragdiv.style.backgroundColor = "red";
+            }
+
+            dropdiv.appendChild(dragdiv);
+            
+        }
+        function allowDrop(event){
+            event.preventDefault();
+        }
+    </script>
+</head>
+<body>
+        <div class="seconddiv" id="dropdiv1" ondragover="allowDrop(event)" ondrop="drop(event, 1)">
+            <div class="purpose" style="background-color: red;">To Do</div>
+            <div class="numbers" id="sq1" draggable="true" ondragstart="drag(event, 1)">#1</div>
+            <div class="numbers" id="sq2" draggable="true" ondragstart="drag(event, 2)">#2</div>
+            <div class="numbers" id="sq3" draggable="true" ondragstart="drag(event, 3)">#3</div>
+        </div>
+        <div class="seconddiv" id="dropdiv2" ondragover="allowDrop(event)" ondrop="drop(event, 2)">
+            <div class="purpose" style="background-color: yellow; color: black;">In Progress</div>
+            <div class="numbers" id="sq4" draggable="true" ondragstart="drag(event, 4)">#4</div>
+            <div class="numbers" id="sq5" draggable="true" ondragstart="drag(event, 5)">#5</div>
+        </div>
+        <div class="seconddiv" id="dropdiv3" ondragover="allowDrop(event)" ondrop="drop(event, 3)">
+            <div class="purpose" style="background-color:green;">Done</div>
+        </div>
+</body>
+</html>
