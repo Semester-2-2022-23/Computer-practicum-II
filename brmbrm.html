@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		#numberdisplay{
+			width: 300px;
+			font-size: 80px;
+			text-align: center;
+			color: purple;
+		}
+
+		#buttoncontainer{
+			width: 300px;
+		}
+
+		button{
+			width: 80px;
+			height: 50px;
+			color: darkblue;
+			background-color: cyan;
+			border-radius: 10px;
+			font-size: 20px;
+		}
+		#numbers{
+			text-align: center;
+			width: 100px;
+			height: 30px;
+			color: purple;
+			background-color: cyan;
+			border: 1px solid purple;
+			margin-top: 10px;
+			margin-left: 80px;
+		}
+	</style>
+	<script type="">
+		let counter = 0;
+		let intervalID = undefined;
+
+		function increaseCounter(){
+			counter++;
+			document.getElementById("numberdisplay").innerHTML = counter;
+			addElements();
+		}
+		function startTimer(){
+			if(intervalID === undefined){
+				intervalID = setInterval(increaseCounter, 1000);
+			}
+
+		}
+		function stopTimer(){
+			if (intervalID !== undefined) {
+				clearInterval(intervalID);
+				intervalID = undefined;
+			}
+
+		}
+		function resetTimer(){
+			stopTimer();
+			
+			counter=0;
+			document.getElementById("numberdisplay").innerHTML = counter;
+
+			let child = document.getElementById("numbers");
+			document.getElementById("numbercountainer").innerHTML = "";
+			document.getElementById("numbercountainer").appendChild(child);
+		}
+
+		function addElements(){
+			let El = document.createElement("div");
+			El = document.getElementById("numbers").cloneNode(true);
+			El.innerHTML = counter;
+
+            El.style.marginTop = "0";
+			if (counter % 2 == 0) {
+				El.style.borderStyle = "dotted";
+				El.style.backgroundColor = "pink";
+				El.style.borderWidth = "2px";
+			}
+
+			let container = document.getElementById("numbercountainer");
+
+			container.appendChild(El);
+
+		}
+	</script>
+</head>
+<body>
+	<div id="numberdisplay">0</div>
+	<div id="buttoncontainer">
+		<button onclick="startTimer()">Start</button>
+		<button onclick="stopTimer()">Stop</button>
+		<button onclick="resetTimer()">Reset</button>
+	</div>
+
+	<div id="numbercountainer">
+		<div id="numbers">Numbers</div>
+	</div>
+
+</body>
+</html>
