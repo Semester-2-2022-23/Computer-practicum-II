@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Form</title>
+    <style>
+        form{
+            width: 40%;
+            margin: auto;
+            text-align: center;
+        }
+        label{
+            display: inline-block;
+        }
+        input{
+            width: 90%;
+        }
+        select{
+            width: 90%;
+        }
+        input[type="button"]{
+            width: fit-content;
+            background-color: black;
+            color: white;
+            float: left;
+            margin-top: 15px;
+        }
+    </style>
+
+    <script>
+        function confirmform(){
+            let name = document.getElementById("name");
+            if(name.value == ''){
+                name.style.backgroundColor = "red";
+            }
+            else{
+                name.style.backgroundColor = "";
+            }
+            let surname = document.getElementById("surname");
+            if(surname.value == ''){
+                surname.style.backgroundColor = "red";
+            }
+            else{
+                surname.style.backgroundColor = "";
+            }
+
+            let emailval = document.getElementById("email");
+            if(emailval.value.trim().split("@")[1] != "yahoo.com"){
+                emailval.style.backgroundColor = "red";
+            }
+            else{
+                emailval.style.backgroundColor = "";
+            }
+        }
+
+        let colors = ["RED", "YELLOW", "BLUE"];
+
+        function clearcolor(val){
+            while(val.length > 0){
+                val.remove(0);
+            }
+        }
+
+        function getcolor(arr, sel){
+            for(i=0; i<arr.length; i++){
+                let opt = document.createElement("option");
+                opt.text = arr[i];
+                sel.appendChild(opt);
+            }
+        }
+
+        function getColor(){
+            let groupnumber = document.getElementById("group");
+            let colorname = document.getElementById("color");
+
+            clearcolor(colorname);
+            switch(groupnumber.value){
+                case "I":
+                    getcolor(colors, colorname);
+                break;
+                case "II":
+                break;
+                case "III":
+                break;
+            }
+        }
+    </script>
+</head>
+<body>
+    <form method="POST" action="try.html" id="formid">
+        <fieldset>
+            <div>
+                <label for="name">Name:</label>
+                <input id="name" type="text" name="name">
+            </div>
+            <div>
+                <label for="surname">Surname:</label>
+                <input id="surname" type="text" name="surname">
+            </div>
+            <div>
+                <label for="age">Age:</label>
+                <input type="number" name="age" id="age">
+            </div>
+            <div>
+                <label>Email:</label>
+                <input id="email" type="email" name="email">
+            </div>
+        </fieldset>
+        <fieldset>
+            <div>
+                <label for="group">Group:</label>
+                <select name="group" id="group" onchange="getColor()">
+                    <option></option>
+                    <option>I</option>
+                    <option>II</option>
+                    <option>III</option>
+                </select>
+            </div>
+            <div>
+                <label for="color">Color:</label>
+                <select name="color" id="color">
+    
+                </select>
+            </div>
+        </fieldset>
+        <input type="button" value="Confirm" onclick="confirmform()">
+    </form>
+</body>
+</html>
