@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Forms</title>
+	<style type="text/css">
+		form{
+			width: 20%;
+			text-align: center;
+			margin: auto;
+			padding: 20px;
+		}
+		label{
+			display: inline-block;
+			width: 150px;
+		}
+		input{
+			width: 200px;
+		}
+		select{
+			width: 200px;
+		}
+		input[type="button"]{
+			width: 100px;
+			margin: 5px;
+			padding: 5px;
+		}
+	</style>
+	<script type="text/javascript">
+		function confirmForm(){
+			let fullname = document.getElementById("name");
+			if (fullname.value.trim().split(" ").length < 2) {
+				fullname.style.backgroundColor = "lightcoral";
+			}
+			else{
+				fullname.style.backgroundColor = "";
+			}
+
+			let emailadd = document.getElementById("email");
+			if (emailadd.value.trim().split("@")[1] != "student.upr.si") {
+				emailadd.style.backgroundColor = "lightcoral";
+			}
+			else{
+				emailadd.style.backgroundColor = "";
+			}
+			let tellnum = document.getElementById("tell");
+			if (tellnum.value.trim().split("").length < 9) {
+				tellnum.style.backgroundColor = "lightcoral";
+			}
+			else{
+				tellnum.style.backgroundColor = "";
+			}
+
+		}
+		
+		let programsubjects = [ "Mathematics", "CS", "Bioinfomatics"];
+
+		function getStudy(choices, selection){
+			for (let i = 0; i < choices.length; i++) {
+				let option = document.createElement("option");
+				option.text = choices[i];
+				selection.appendChild(option);
+			}
+		}
+
+		function removeOptions(select){
+			while(select.length > 0){
+				select.remove(0);
+			}
+		}
+
+	    function getSubjects(){
+				let programname = document.getElementById("program");
+				let subjectname = document.getElementById("subjects");
+
+                removeOptions(subjectname);
+				switch(programname.value){
+					case "Bachelor's":
+					getStudy(programsubjects, subjectname);
+					break;
+
+					case "Master's":
+					break;
+
+					case "Doctoral":
+					break;
+				}
+		}
+
+	</script>
+</head>
+<body>
+	<form method="POST" action="target.html" id="formid">
+		<fieldset>
+			<div>
+				<label>Student Name:</label>
+				<input id="name" type="text" name="name" required>
+			</div>
+			<div>
+				<label>Date of birth:</label>
+				<input type="date">
+			</div>
+			<div>
+				<label>Telephone No:</label>
+				<input id="tell" type="text" name="tel" placeholder="000-000-000" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}">
+			</div>
+			<div>
+				<label>Email:</label>
+				<input id="email" type="email" name="email">
+			</div>
+		</fieldset>
+		<fieldset>
+			<div>
+				<label>Study Program:</label>
+				<select id="program" onchange="getSubjects()">
+					<option></option>
+					<option>Bachelor's</option>
+					<option>Master's</option>
+					<option>Doctoral</option>
+				</select>
+			</div>
+			<div>
+				<label>Subjects:</label>
+				<select id="subjects">
+				</select>
+			</div>
+		</fieldset>
+		<input type="button" value="Confirm" onclick="confirmForm()">
+	</form>
+</body>
+</html>
