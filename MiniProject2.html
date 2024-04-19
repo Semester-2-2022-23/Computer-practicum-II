@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.container label {
+  display: gray;
+  margin: 10px 0;
+}
+
+.container input, select {
+  width: 50%;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+/*button*/
+.container button {
+  width: 10%;
+  padding: 10px;
+  background-color: green;
+  color: white;
+  border: none;
+  margin-top: 10px;
+  float: right;
+}
+
+/*the colors are in the footer*/
+.footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  padding: 20px 0;
+}
+
+
+.color-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+}
+
+.color-bar div {
+  height: 50px;
+  position: relative;
+}
+
+.color-bar div::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+
+@media screen and (max-width: 800px) {
+  body {
+    align-items: center;
+  }
+  .container, .color-bar {
+    width: 100%;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+  <form action="/action_page.php">
+    <p>
+    <label for="country">Country</label>
+    <select id="country" name="country">
+      <option value="slovenia">Slovenia</option>
+      <option value="croatia">Croatia</option>
+    </select>
+  </p>
+  <p>
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" placeholder=" ">
+  </p>
+  <p>  
+    <label for="phone">Phone</label>
+    <input type="tel" name="phone" pattern="[0-9]{4}-[0-9]{2}-[0-9]{3}" placeholder ="1234-12-123">
+  </p>
+  <p>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" placeholder=" ">
+  </p>
+    <button type="submit">Log in</button>
+  </form>
+</div>
+
+<div class="footer">
+  <div class="color-bar">
+    <div style="background-color: #4b6043;">1</div>
+    <div style="background-color: #658354;">2</div>
+    <div style="background-color: #75975e;">3</div>
+    <div style="background-color: #87ab69;">4</div>
+    <div style="background-color: #95bb72;">5</div>
+    <div style="background-color: #a3c585;">6</div>
+    <div style="background-color: #b3cf99;">7</div>
+    <div style="background-color: #ddead1;">8</div>
+  </div>
+</div>
+
+</body>
+
+</body>
+</html>
