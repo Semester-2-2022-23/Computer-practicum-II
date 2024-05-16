@@ -1,0 +1,98 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+<meta charset="utf-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<title>MiniProject4</title> 
+<style> 
+.box{ 
+position: relative; 
+width:140px;
+height:140px;
+border: 1px solid black; 
+float: left; 
+margin-bottom:20px;
+} 
+.circle{ 
+width:140px;
+height:140px;
+background-color:red; 
+border: 1px solid black; 
+border-radius: 50%; 
+margin:auto; 
+} 
+.buttons{ 
+clear:both; 
+} 
+.buttons button{ 
+margin:5px;
+font-size: 20px;
+} 
+.selected .circle { 
+    background-color: red; 
+} 
+</style> 
+<script type="text/javascript"> 
+function move(id){ 
+    var prevElement = document.querySelector('.selected'); 
+    if (prevElement) { 
+        prevElement.innerHTML = ''; 
+        prevElement.classList.remove('selected'); 
+    } 
+    var element = document.getElementById(id); 
+    element.innerHTML = "<div class='circle'></div>"; 
+    element.classList.add('selected'); 
+} 
+ 
+function delete_circle(delete_id){ //deleting cicrle from previous box
+    document.getElementById(delete_id.toString()).innerHTML=""; 
+} 
+</script> 
+</head> 
+<body> 
+<div id="grid"></div> 
+ 
+<!-- grid -->
+<script type="text/javascript"> 
+var id=1; 
+for(i=1; i<=3; i++){ 
+    for(j=1; j<=10; j++){ 
+        document.getElementById("grid").innerHTML=document.getElementById("grid").innerHTML+`<div class='box' id="${id}" onclick="move(id)"></div>`; 
+        id++; 
+    } 
+} 
+document.getElementById('1').innerHTML="<div class='circle'></div>"; //initially put circle to the first box
+
+function forward() {
+    if (currentId < 30) {
+        move(currentId + 1);
+    }
+}
+
+function backward() {
+    if (currentId > 1) {
+        move(currentId - 1);
+    }
+}
+
+function down() {
+    if (currentId <= 20) {
+        move(currentId + 10);
+    }
+}
+
+function up() {
+    if (currentId > 10) {
+        move(currentId - 10);
+    }
+}
+
+</script> 
+<div class="buttons"> 
+<button type="button" onclick="forward()">Forward</button> 
+<button type="button" onclick="backward()">Backward</button> 
+<button type="button" onclick="down()">Down</button> 
+<button type="button" onclick="up()">Up</button> 
+</div> 
+</body> 
+</html> 

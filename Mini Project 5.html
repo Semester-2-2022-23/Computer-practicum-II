@@ -1,0 +1,124 @@
+<!-- Anastasija Temova -->
+<!-- 89221055 -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mini Project 5</title>
+    <style>
+        body{
+            font-size: 20px;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        button{
+            font-size: 17px;
+        }
+        /*style for horizontal rule*/
+        hr{ 
+            clear:both;
+            margin-top:0.5em;
+            margin-bottom:0.5em;
+        }
+
+        #plane{
+            border:3px solid black;
+            background-color:rgba(255,0,0,0.75);
+            width: 50em;
+            height: 25em;
+            position:relative;
+            margin: auto;
+            margin-top:2em;
+            margin-bottom:4.5em;
+
+        }
+        /*circle part*/
+        .circle{
+            border: 0.1em solid black;
+            background-color: green;
+            width: 2em;
+            height: 2em;
+            border-radius: 50%;
+            position: absolute;
+
+        }
+
+    </style>
+</head>
+
+<h1>Mini Project 5</h1>
+
+<body>
+    <!-- input fields for x and y positions -->
+    <div style="text-align: center;">
+    left = <input type="text" id="inputX" value="0">% 
+    top = <input type="text" id="inputY" value="0">%
+    <!-- button to trigger the drop function -->
+    <button onclick="drop();" id="button">Drop</button>
+    </div>
+    <!-- container for the plane and circles -->
+    <div id="plane"></div>
+    <script type="text/javascript">
+        //constants for dimensions and intervals
+        const widthOfPlane = 50;
+        const heightOfPlane = 25;
+        const circleDiameter = 2.1; 
+        const maxX = (1 - (circleDiameter / widthOfPlane)) * 100;
+        const maxY = (1 - (circleDiameter / heightOfPlane)) * 100;
+        let dropInterval = undefined;
+        let selectedDiv = undefined;
+        let xPositionSelected = 0;
+        let yPositionSelected = 0;
+        //function to extract numerical value from the percentage string
+        function getPercNumber(valueString){
+            return Number(valueString.replace('%', ''));
+        }
+        //function to get and validate x position input value
+        function getPercInputValue(inputId) {
+            let val = document.getElementById(inputId).value; //get the value from the input
+            val = Number(val); //conevrting value to number
+            if (!isNaN(val)){ //checking if value is number
+                return Math.min(Math.max(val, 0), maxX); 
+            } else{
+                return 0; //default to 0 if the number is not a number
+            }
+        }
+        //function to initiate the drop animation
+        function drop(){
+            //disable the button during animation
+            document.getElementById('button').disabled = true;
+            //change color of the existing circles to grey
+            const circles = document.getElementsByClassName('circle');
+            for (let i = 0; i < circles.length; i++){
+                circles[i].style.backgroundColor = 'grey';
+            }
+            //create a new circle element
+            selectedDiv = document.createElement("div");
+            selectedDiv.className = "circle";
+            document.getElementById("plane").appendChild(selectedDiv);
+            //get and set x and y positions for the new circle
+            xPositionSelected = getPercInputValue("inputX");
+            yPositionSelected = getPercInputValue("inputY");
+            selectedDiv.style.left = xPositionSelected + "%";
+            selectedDiv.style.top = yPositionSelected + "%";
+            //start the drop animation
+            dropInterval = setInterval(move, 10);
+        }
+
+        //function to move the circle down until it reaches the bottom of the plane
+        function move(){
+            if (yPositionSelected >= maxY){
+                clearInterval(dropInterval); //clear the interval when the bottom is reached
+                //after using it enable the drop button again 
+                document.getElementById('button').disabled = false;
+            } else{
+                //increment y position and update circle position
+                yPositionSelected += 0.2;
+                selectedDiv.style.top = yPositionSelected + "%";
+            }
+        }
+    </script>
+</body>
+</html>
